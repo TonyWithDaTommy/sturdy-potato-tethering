@@ -1,0 +1,21 @@
+# USB Tethering Automatic Connection Rules
+# Triggers when Android device is connected in tethering mode
+
+# RNDIS interface detection
+ACTION=="add", SUBSYSTEM=="net", ENV{ID_USB_DRIVER}=="rndis_host", RUN+="/usr/local/bin/usb-tether-auto.sh"
+ACTION=="add", SUBSYSTEM=="net", ATTRS{idVendor}=="*", DRIVERS=="rndis_host", RUN+="/usr/local/bin/usb-tether-auto.sh"
+
+# Android vendor-specific rules
+ACTION=="add", SUBSYSTEM=="net", ATTRS{idVendor}=="18d1", RUN+="/usr/local/bin/usb-tether-auto.sh"  # Google
+ACTION=="add", SUBSYSTEM=="net", ATTRS{idVendor}=="04e8", RUN+="/usr/local/bin/usb-tether-auto.sh"  # Samsung
+ACTION=="add", SUBSYSTEM=="net", ATTRS{idVendor}=="0bb4", RUN+="/usr/local/bin/usb-tether-auto.sh"  # HTC
+ACTION=="add", SUBSYSTEM=="net", ATTRS{idVendor}=="1004", RUN+="/usr/local/bin/usb-tether-auto.sh"  # LG
+ACTION=="add", SUBSYSTEM=="net", ATTRS{idVendor}=="22b8", RUN+="/usr/local/bin/usb-tether-auto.sh"  # Motorola
+ACTION=="add", SUBSYSTEM=="net", ATTRS{idVendor}=="0fce", RUN+="/usr/local/bin/usb-tether-auto.sh"  # Sony
+ACTION=="add", SUBSYSTEM=="net", ATTRS{idVendor}=="2a70", RUN+="/usr/local/bin/usb-tether-auto.sh"  # OnePlus
+ACTION=="add", SUBSYSTEM=="net", ATTRS{idVendor}=="2717", RUN+="/usr/local/bin/usb-tether-auto.sh"  # Xiaomi
+ACTION=="add", SUBSYSTEM=="net", ATTRS{idVendor}=="12d1", RUN+="/usr/local/bin/usb-tether-auto.sh"  # Huawei
+
+# Generic USB network interfaces
+ACTION=="add", SUBSYSTEM=="net", KERNEL=="usb*", RUN+="/usr/local/bin/usb-tether-auto.sh"
+ACTION=="add", SUBSYSTEM=="net", KERNEL=="rndis*", RUN+="/usr/local/bin/usb-tether-auto.sh"
